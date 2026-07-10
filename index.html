@@ -136,7 +136,7 @@ font-size:15px;
 </div>
 
 <div>
-<button>Watch Ads</button>
+<button onclick="watchAd()">Watch Rewarded Ad</button>
 <button>Daily Bonus</button>
 <button>Referral</button>
 <button>Withdraw</button>
@@ -314,6 +314,16 @@ async function watchAd() {
 function notify(msg) {
   alert(msg);
 }
+  async function loadCoins() {
+  const res = await fetch(API + "/coins");
+  const data = await res.json();
+
+  document.querySelector("#home div p").innerText = data.coins;
+  document.querySelector("#wallet p").innerText =
+    "Total Coins : " + data.coins;
+}
+
+loadCoins();
 </script>
 
 </body>
