@@ -233,21 +233,35 @@ font-size:15px;
 
 </nav>
 <script>
-  const tg = window.Telegram.WebApp;
+  async function loginUser() {
+  const user = tg.initDataUnsafe.user;
 
-tg.ready();
-tg.expand();
+  if (!user) return;
 
-const user = tg.initDataUnsafe.user;
+  const res = await fetch(API + "/api/auth/login", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      telegramId: user.id.toString(),
+      username: user.username,
+      firstName: user.first_name,
+      lastName: user.last_name
+    })
+  });
 
-if (user) {
-    document.getElementById("profile").innerHTML = `
-        <h2>Profile</h2>
-        <p><b>Name:</b> ${user.first_name || ""} ${user.last_name || ""}</p>
-        <p><b>Username:</b> @${user.username || "No Username"}</p>
-        <p><b>Telegram ID:</b> ${user.id}</p>
-    `;
-}
+  const data = await res.json();
+
+  document.getElementById("profile").innerHTML = `
+      <h2>Profile</h2>
+      <p><b>Name:</b> ${data.firstName} ${data.lastName || ""}</p>
+      <p><b>Username:</b> @${data.username || "No Username"}</p>
+      <p><b>User ID:</b> ${data.userId}</p>
+      <p><b>Referral Code:</b> ${data.referralCode}</p>
+      <p><b>Balance:</b> ${data.balance}</p>
+  `;
+  }
   const API = "https://nexo-earn.onrender.com";
   // Splash Screen
 setTimeout(() => {
@@ -338,6 +352,7 @@ async function watchAd() {
 }
 
 loadCoins();
+loginUser();
 </script>
   
 </body>
