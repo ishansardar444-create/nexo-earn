@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Nexo Earn</title>
@@ -232,6 +233,21 @@ font-size:15px;
 
 </nav>
 <script>
+  const tg = window.Telegram.WebApp;
+
+tg.ready();
+tg.expand();
+
+const user = tg.initDataUnsafe.user;
+
+if (user) {
+    document.getElementById("profile").innerHTML = `
+        <h2>Profile</h2>
+        <p><b>Name:</b> ${user.first_name || ""} ${user.last_name || ""}</p>
+        <p><b>Username:</b> @${user.username || "No Username"}</p>
+        <p><b>Telegram ID:</b> ${user.id}</p>
+    `;
+}
   const API = "https://nexo-earn.onrender.com";
   // Splash Screen
 setTimeout(() => {
