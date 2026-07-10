@@ -176,184 +176,414 @@ font-size:15px;
 
 <!-- Tasks -->
 <section id="tasks">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nexo Earn</title>
+
+<link rel="stylesheet" href="style.css">
+
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- Splash -->
+
+<div id="splash">
+<div class="loader"></div>
+
+<h1>Nexo Earn</h1>
+
+<p>Loading...</p>
+
+</div>
+
+<!-- Main App -->
+
+<div id="app">
+
+<!-- Header -->
+
+<header>
+
+<div class="user">
+
+<img id="avatar" src="https://i.pravatar.cc/150" alt="avatar">
+
+<div>
+
+<h3 id="name">Loading...</h3>
+
+<p id="userid">NEXO...</p>
+
+</div>
+
+</div>
+
+<div class="balance">
+
+<h2 id="coins">0</h2>
+
+<span>Coins</span>
+
+</div>
+
+</header>
+
+<!-- Dashboard -->
+
+<section id="home" class="page active">
+
+<div class="card">
+
+<h2>Today's Earnings</h2>
+
+<h1 id="todayCoins">0</h1>
+
+</div>
+
+<div class="grid">
+
+<button onclick="watchAd()">
+
+🎬
+
+Watch Ad
+
+</button>
+
+<button onclick="claimBonus()">
+
+🎁
+
+Daily Bonus
+
+</button>
+
+<button onclick="showPage('wallet')">
+
+💰
+
+Wallet
+
+</button>
+
+<button onclick="showPage('referral')">
+
+👥
+
+Referral
+
+</button>
+
+<button onclick="showPage('tasks')">
+
+✅
+
+Tasks
+
+</button>
+
+<button onclick="showPage('leaderboard')">
+
+🏆
+
+Leaderboard
+
+</button>
+
+<button onclick="showPage('withdraw')">
+
+💸
+
+Withdraw
+
+</button>
+
+<button onclick="showPage('profile')">
+
+👤
+
+Profile
+
+</button>
+
+</div>
+
+</section>
+
+<!-- Wallet -->
+
+<section id="wallet" class="page">
+
+<h2>Wallet</h2>
+
+<div class="card">
+
+<p>Total Coins</p>
+
+<h2 id="walletCoins">0</h2>
+
+</div>
+
+<div class="card">
+
+<p>Total Earnings</p>
+
+<h2 id="walletMoney">₹0</h2>
+
+</div>
+
+<button onclick="showPage('withdraw')">
+
+Withdraw
+
+</button>
+
+</section>
+
+<!-- Referral -->
+
+<section id="referral" class="page">
+
+<h2>Referral</h2>
+
+<div class="card">
+
+<h3>Your Code</h3>
+
+<p id="refCode">NEXO0000</p>
+
+<button onclick="copyReferral()">
+
+Copy
+
+</button>
+
+<button onclick="shareReferral()">
+
+Share
+
+</button>
+
+</div>
+
+</section>
+
+<!-- Tasks -->
+
+<section id="tasks" class="page">
+
 <h2>Tasks</h2>
+
+<div class="card">
+
 <ul>
+
 <li>Watch Ads</li>
+
 <li>Invite Friends</li>
+
 <li>Daily Login</li>
+
+<li>Join Telegram Channel</li>
+
 </ul>
-</section>
 
-<!-- Leaderboard -->
-<section id="leaderboard">
+</div>
+
+</section>
+<script>
+  <!-- Leaderboard -->
+
+<section id="leaderboard" class="page">
+
 <h2>Leaderboard</h2>
-<p>Top Users</p>
+
+<div class="card">
+
+<table>
+
+<tr>
+
+<th>Rank</th>
+
+<th>User</th>
+
+<th>Coins</th>
+
+</tr>
+
+<tr>
+
+<td>1</td>
+
+<td>🔥 NexoKing</td>
+
+<td>152000</td>
+
+</tr>
+
+<tr>
+
+<td>2</td>
+
+<td>⚡ CryptoBoss</td>
+
+<td>124500</td>
+
+</tr>
+
+<tr>
+
+<td>3</td>
+
+<td>⭐ TelegramPro</td>
+
+<td>101800</td>
+
+</tr>
+
+</table>
+
+</div>
+
 </section>
 
-<!-- Withdrawal -->
-<section id="withdraw">
-<h2>Withdraw</h2>
+<!-- Withdraw -->
 
-<select>
+<section id="withdraw" class="page">
+
+<h2>Withdrawal</h2>
+
+<div class="card">
+
+<select id="method">
+
 <option>UPI</option>
+
 <option>Paytm</option>
-<option>USDT</option>
+
 <option>Binance Pay</option>
+
+<option>USDT (TRC20)</option>
+
 <option>Litecoin</option>
+
 </select>
 
-<input type="number" placeholder="Enter Amount">
+<input
+type="number"
+id="amount"
+placeholder="Enter Amount">
 
-<button>Submit</button>
+<button onclick="withdraw()">
+
+Submit Withdrawal
+
+</button>
+
+<p class="note">
+
+Withdrawal requests are processed within
+24–48 hours.
+
+</p>
+
+</div>
 
 </section>
 
 <!-- Profile -->
-<section id="profile">
+
+<section id="profile" class="page">
+
 <h2>Profile</h2>
 
-<p>Name</p>
-<p>Username</p>
-<p>User ID</p>
+<div class="card">
+
+<img id="profileAvatar"
+src="https://i.pravatar.cc/150"
+class="profile-img">
+
+<h3 id="profileName">
+
+Loading...
+
+</h3>
+
+<p id="profileUsername">
+
+@username
+
+</p>
+
+<p id="profileId">
+
+NEXO...
+
+</p>
+
+<p>
+
+Referral Code
+
+</p>
+
+<h3 id="profileReferral">
+
+NEXO0000
+
+</h3>
+
+</div>
 
 </section>
 
 <!-- Bottom Navigation -->
+
 <nav>
 
-<button>Home</button>
+<button onclick="showPage('home')">
 
-<button>Earn</button>
+🏠
 
-<button>Wallet</button>
+</button>
 
-<button>Referral</button>
+<button onclick="showPage('wallet')">
 
-<button>Profile</button>
+💰
+
+</button>
+
+<button onclick="showPage('tasks')">
+
+✅
+
+</button>
+
+<button onclick="showPage('referral')">
+
+👥
+
+</button>
+
+<button onclick="showPage('profile')">
+
+👤
+
+</button>
 
 </nav>
-<script>
-  async function loginUser() {
-  const user = tg.initDataUnsafe.user;
 
-  if (!user) return;
+<script src="script.js"></script>
 
-  const res = await fetch(API + "/api/auth/login", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      telegramId: user.id.toString(),
-      username: user.username,
-      firstName: user.first_name,
-      lastName: user.last_name
-    })
-  });
-
-  const data = await res.json();
-
-  document.getElementById("profile").innerHTML = `
-      <h2>Profile</h2>
-      <p><b>Name:</b> ${data.firstName} ${data.lastName || ""}</p>
-      <p><b>Username:</b> @${data.username || "No Username"}</p>
-      <p><b>User ID:</b> ${data.userId}</p>
-      <p><b>Referral Code:</b> ${data.referralCode}</p>
-      <p><b>Balance:</b> ${data.balance}</p>
-  `;
-  }
-  const API = "https://nexo-earn.onrender.com";
-  // Splash Screen
-setTimeout(() => {
-  document.getElementById("splash").style.display = "none";
-  document.getElementById("home").style.display = "block";
-}, 2000);
-
-// Show Page Function
-function showPage(pageId) {
-  const pages = document.querySelectorAll("section");
-  pages.forEach(page => page.style.display = "none");
-  document.getElementById(pageId).style.display = "block";
-}
-
-// Bottom Navigation
-document.querySelectorAll("nav button")[0].onclick = () => showPage("home");
-document.querySelectorAll("nav button")[1].onclick = () => showPage("earn");
-document.querySelectorAll("nav button")[2].onclick = () => showPage("wallet");
-document.querySelectorAll("nav button")[3].onclick = () => showPage("referral");
-document.querySelectorAll("nav button")[4].onclick = () => showPage("profile");
-
-// Daily Bonus
-let claimed = false;
-
-function claimBonus() {
-  if (claimed) {
-    alert("Today's bonus already claimed!");
-    return;
-  }
-
-  claimed = true;
-  alert("🎉 50 Coins Added!");
-}
-
-// Copy Referral
-function copyReferral() {
-  const code = "NEXO12345";
-  navigator.clipboard.writeText(code);
-  alert("Referral Code Copied!");
-}
-
-// Share Referral
-function shareReferral() {
-  if (navigator.share) {
-    navigator.share({
-      title: "Nexo Earn",
-      text: "Join using my referral!",
-      url: "https://t.me/Nexo_Ads_Earn_Bot"
-    });
-  } else {
-    alert("Sharing not supported.");
-  }
-}
-
-// Coin Counter Demo
-let coins = 0;
-
-function addCoins(amount) {
-  coins += amount;
-
-  document.querySelector("#wallet p").innerText =
-    "Total Coins : " + coins;
-}
-
-// Notification
-function notify(msg) {
-  alert(msg);
-}async function loadCoins() {
-  try {
-    const res = await fetch(API + "/coins");
-    const data = await res.json();
-
-    document.getElementById("totalCoins").innerText = data.coins;
-    document.getElementById("walletCoins").innerText =
-      "Total Coins : " + data.coins;
-  } catch (e) {
-    console.log(e);
-  }
-}
-async function watchAd() {
-  await fetch(API + "/addcoins", {
-    method: "POST"
-  });
-
-  await loadCoins();
-
-  alert("20 Coins Added!");
-}
-
-loadCoins();
-loginUser();
-</script>
-  
 </body>
+
 </html>
