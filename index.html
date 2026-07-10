@@ -296,9 +296,18 @@ function addCoins(amount) {
 }
 
 // Watch Ad Demo
-function watchAd() {
-  alert("Rewarded Ad Completed!");
-  addCoins(20);
+async function watchAd() {
+  const res = await fetch(API + "/addcoins", {
+    method: "POST"
+  });
+
+  const data = await res.json();
+
+  document.querySelector("#home div p").innerText = data.coins;
+  document.querySelector("#wallet p").innerText =
+    "Total Coins : " + data.coins;
+
+  alert("20 Coins Added!");
 }
 
 // Notification
