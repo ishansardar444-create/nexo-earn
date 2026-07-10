@@ -127,7 +127,7 @@ font-size:15px;
 
 <div>
 <h3>Total Coins</h3>
-<p>0</p>
+<p id="totalCoins">0</p>
 </div>
 
 <div>
@@ -147,7 +147,7 @@ font-size:15px;
 <!-- Wallet -->
 <section id="wallet">
 <h2>Wallet</h2>
-<p>Total Coins : 0</p>
+<p id="walletCoins">Total Coins : 0</p>
 <p>Total Earnings : ₹0</p>
 <button>Withdraw</button>
 </section>
@@ -297,17 +297,22 @@ function addCoins(amount) {
 
 // Watch Ad Demo
 async function watchAd() {
-  const res = await fetch(API + "/addcoins", {
-    method: "POST"
-  });
+  try {
+    const res = await fetch(API + "/addcoins", {
+      method: "POST"
+    });
 
-  const data = await res.json();
+    const data = await res.json();
 
-  document.querySelector("#home div p").innerText = data.coins;
-  document.querySelector("#wallet p").innerText =
-    "Total Coins : " + data.coins;
+    document.getElementById("totalCoins").innerText = data.coins;
+    document.getElementById("walletCoins").innerText =
+      "Total Coins : " + data.coins;
 
-  alert("20 Coins Added!");
+    alert("20 Coins Added!");
+  } catch (err) {
+    alert("Server Error");
+    console.log(err);
+  }
 }
 // Notification
 function notify(msg) {
