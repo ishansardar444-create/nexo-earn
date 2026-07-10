@@ -137,8 +137,9 @@ font-size:15px;
 
 <div>
 <button onclick="watchAd()">Watch Rewarded Ad</button>
-<button>Daily Bonus</button>
-<button>Referral</button>
+<button onclick="claimBonus()">Daily Bonus</button>
+<button onclick="copyReferral()">Copy Link</button>
+<button onclick="shareReferral()">Share</button>
 <button>Withdraw</button>
 </div>
 
@@ -295,38 +296,21 @@ function addCoins(amount) {
     "Total Coins : " + coins;
 }
 
-// Watch Ad Demo
-async function watchAd() {
+// Notification
+function notify(msg) {
+  alert(msg);
+}async function loadCoins() {
   try {
-    const res = await fetch(API + "/addcoins", {
-      method: "POST"
-    });
-
+    const res = await fetch(API + "/coins");
     const data = await res.json();
 
     document.getElementById("totalCoins").innerText = data.coins;
     document.getElementById("walletCoins").innerText =
       "Total Coins : " + data.coins;
-
-    alert("20 Coins Added!");
-  } catch (err) {
-    alert("Server Error");
-    console.log(err);
+  } catch (e) {
+    console.log(e);
   }
 }
-// Notification
-function notify(msg) {
-  alert(msg);
-}
-  async function loadCoins() {
-  const res = await fetch(API + "/coins");
-  const data = await res.json();
-
-  document.querySelector("#home div p").innerText = data.coins;
-  document.querySelector("#wallet p").innerText =
-    "Total Coins : " + data.coins;
-}
-
 async function watchAd() {
   await fetch(API + "/addcoins", {
     method: "POST"
