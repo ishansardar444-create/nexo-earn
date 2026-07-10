@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nexo Earn</title>
+</head>
+<style>
+body{
+margin:0;
+padding:0;
+font-family:Arial,sans-serif;
+background:linear-gradient(135deg,#0f172a,#1e293b,#312e81);
+color:#fff;
+}
+
+section{
+display:none;
+padding:20px;
+}
+
+#home{
+display:block;
+}
+
+#splash{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+background:#0f172a;
+z-index:999;
+}
+
+button{
+width:100%;
+padding:14px;
+margin:8px 0;
+border:none;
+border-radius:15px;
+font-size:16px;
+font-weight:bold;
+background:linear-gradient(90deg,#2563eb,#7c3aed);
+color:white;
+cursor:pointer;
+transition:.3s;
+}
+
+button:hover{
+transform:scale(1.03);
+}
+
+div{
+background:rgba(255,255,255,.08);
+backdrop-filter:blur(12px);
+border-radius:20px;
+padding:15px;
+margin:15px 0;
+border:1px solid rgba(255,255,255,.15);
+}
+
+input,select{
+width:100%;
+padding:12px;
+margin:10px 0;
+border:none;
+border-radius:12px;
+background:#1e293b;
+color:#fff;
+}
+
+nav{
+position:fixed;
+bottom:0;
+left:0;
+width:100%;
+display:flex;
+justify-content:space-around;
+padding:12px 0;
+background:rgba(15,23,42,.95);
+backdrop-filter:blur(15px);
+}
+
+nav button{
+width:18%;
+margin:0;
+padding:10px;
+font-size:14px;
+}
+
+h1,h2,h3{
+margin:10px 0;
+}
+
+@media(max-width:768px){
+body{
+font-size:15px;
+}
+button{
+font-size:15px;
+}
+}
+</style>
+
+<body>
+
+<!-- Splash Screen -->
+<div id="splash">
+<h1>Nexo Earn</h1>
+<p>Loading...</p>
+</div>
+
+<!-- Login -->
+<section id="login">
+<h2>Welcome</h2>
+<button>Login with Telegram</button>
+</section>
+
+<!-- Home Dashboard -->
+<section id="home">
+<h2>Dashboard</h2>
+
+<div>
+<h3>Total Coins</h3>
+<p>0</p>
+</div>
+
+<div>
+<h3>Today's Earnings</h3>
+<p>0 Coins</p>
+</div>
+
+<div>
+<button>Watch Ads</button>
+<button>Daily Bonus</button>
+<button>Referral</button>
+<button>Withdraw</button>
+</div>
+
+</section>
+
+<!-- Wallet -->
+<section id="wallet">
+<h2>Wallet</h2>
+<p>Total Coins : 0</p>
+<p>Total Earnings : ₹0</p>
+<button>Withdraw</button>
+</section>
+
+<!-- Earn -->
+<section id="earn">
+<h2>Watch Ads & Earn</h2>
+<button>Watch Rewarded Ad</button>
+</section>
+
+<!-- Daily Bonus -->
+<section id="bonus">
+<h2>Daily Bonus</h2>
+<button>Claim Bonus</button>
+</section>
+
+<!-- Referral -->
+<section id="referral">
+<h2>Referral</h2>
+<p>Your Referral Code</p>
+<button>Copy Link</button>
+<button>Share</button>
+</section>
+
+<!-- Tasks -->
+<section id="tasks">
+<h2>Tasks</h2>
+<ul>
+<li>Watch Ads</li>
+<li>Invite Friends</li>
+<li>Daily Login</li>
+</ul>
+</section>
+
+<!-- Leaderboard -->
+<section id="leaderboard">
+<h2>Leaderboard</h2>
+<p>Top Users</p>
+</section>
+
+<!-- Withdrawal -->
+<section id="withdraw">
+<h2>Withdraw</h2>
+
+<select>
+<option>UPI</option>
+<option>Paytm</option>
+<option>USDT</option>
+<option>Binance Pay</option>
+<option>Litecoin</option>
+</select>
+
+<input type="number" placeholder="Enter Amount">
+
+<button>Submit</button>
+
+</section>
+
+<!-- Profile -->
+<section id="profile">
+<h2>Profile</h2>
+
+<p>Name</p>
+<p>Username</p>
+<p>User ID</p>
+
+</section>
+
+<!-- Bottom Navigation -->
+<nav>
+
+<button>Home</button>
+
+<button>Earn</button>
+
+<button>Wallet</button>
+
+<button>Referral</button>
+
+<button>Profile</button>
+
+</nav>
+<script>
+  // Splash Screen
+setTimeout(() => {
+  document.getElementById("splash").style.display = "none";
+  document.getElementById("home").style.display = "block";
+}, 2000);
+
+// Show Page Function
+function showPage(pageId) {
+  const pages = document.querySelectorAll("section");
+  pages.forEach(page => page.style.display = "none");
+  document.getElementById(pageId).style.display = "block";
+}
+
+// Bottom Navigation
+document.querySelectorAll("nav button")[0].onclick = () => showPage("home");
+document.querySelectorAll("nav button")[1].onclick = () => showPage("earn");
+document.querySelectorAll("nav button")[2].onclick = () => showPage("wallet");
+document.querySelectorAll("nav button")[3].onclick = () => showPage("referral");
+document.querySelectorAll("nav button")[4].onclick = () => showPage("profile");
+
+// Daily Bonus
+let claimed = false;
+
+function claimBonus() {
+  if (claimed) {
+    alert("Today's bonus already claimed!");
+    return;
+  }
+
+  claimed = true;
+  alert("🎉 50 Coins Added!");
+}
+
+// Copy Referral
+function copyReferral() {
+  const code = "NEXO12345";
+  navigator.clipboard.writeText(code);
+  alert("Referral Code Copied!");
+}
+
+// Share Referral
+function shareReferral() {
+  if (navigator.share) {
+    navigator.share({
+      title: "Nexo Earn",
+      text: "Join using my referral!",
+      url: "https://t.me/Nexo_Ads_Earn_Bot"
+    });
+  } else {
+    alert("Sharing not supported.");
+  }
+}
+
+// Coin Counter Demo
+let coins = 0;
+
+function addCoins(amount) {
+  coins += amount;
+
+  document.querySelector("#wallet p").innerText =
+    "Total Coins : " + coins;
+}
+
+// Watch Ad Demo
+function watchAd() {
+  alert("Rewarded Ad Completed!");
+  addCoins(20);
+}
+
+// Notification
+function notify(msg) {
+  alert(msg);
+}
+</script>
+
+</body>
+</html>
