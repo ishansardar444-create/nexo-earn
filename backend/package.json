@@ -1,4 +1,4 @@
-{
+6{
   "name": "nexo-earn-backend",
   "version": "1.0.0",
   "main": "server.js",
@@ -6,7 +6,8 @@
     "start": "node server.js"
   },
   "dependencies": {
-    "express": "^4.19.2",
-    "cors": "^2.8.5"
+  "cors": "^2.8.5",
+  "express": "^4.19.2",
+  "mongoose": "^8.15.0"
   }
 }
