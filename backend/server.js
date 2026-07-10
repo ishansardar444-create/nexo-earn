@@ -1,12 +1,26 @@
 const express = require("express");
+
 const app = express();
 
+app.use(express.json());
+
+let coins = 0;
+
 app.get("/", (req, res) => {
-  res.send("Nexo Earn Backend is Running");
+  res.send("Nexo Earn Backend Running");
 });
 
-const PORT = 3000;
+app.get("/coins", (req, res) => {
+  res.json({ coins });
+});
+
+app.post("/addcoins", (req, res) => {
+  coins += 20;
+  res.json({ coins });
+});
+
+const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
-  console.log("Server started on port " + PORT);
+  console.log("Server Started");
 });
