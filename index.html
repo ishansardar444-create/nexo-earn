@@ -322,8 +322,8 @@ function notify(msg) {
   const res = await fetch(API + "/coins");
   const data = await res.json();
 
-  document.querySelector("#home div p").innerText = data.coins;
-  document.querySelector("#wallet p").innerText =
+  document.getElementById("totalCoins").innerText = data.coins;
+  document.getElementById("walletCoins").innerText =
     "Total Coins : " + data.coins;
 }
 
